@@ -1,0 +1,24 @@
+type NftOwner @entity {
+  id: ID!
+  owner: Bytes! # address of current owner
+  tokenId: BigInt!
+}
+
+type NftTransferred @entity {
+  id: ID!
+  newOwner: Bytes! # address to
+  oldOwner: Bytes! # address from
+  tokenId: BigInt!
+}
+
+type NftMinted @entity {
+  id: ID!
+  buyer: Bytes! # buyer/minter
+  tokenId: BigInt!
+}
+
+type NftBurned @entity {
+  id: ID!
+  holder: Bytes! # address to
+  tokenId: BigInt!
+}

@@ -1,0 +1,36 @@
+specVersion: 0.0.4
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: CoffeeNFT
+    network: goerli
+    source:
+      address: "0xF50d6C818ffd4E23d388eb74Ab589640f36BDB0c"
+      abi: CoffeeNFT
+      startBlock: 8216605
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - ApprovalForAll
+        - NftBurned
+        - NftMinted
+        - Transfer
+      abis:
+        - name: CoffeeNFT
+          file: ./abis/CoffeeNFT.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,indexed uint256)
+          handler: handleApproval
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: NftBurned(indexed address,indexed uint256)
+          handler: handleNftBurned
+        - event: NftMinted(indexed address,indexed uint256)
+          handler: handleNftMinted
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/coffee-nft.ts
